@@ -17,6 +17,7 @@ import {
 	embedRedditIcon,
 	embedTumbrIcon,
 } from './icons';
+import { YouTubeInspectorControls, YouTubePreviewTransform } from './youtube-controls';
 
 /**
  * WordPress dependencies
@@ -42,6 +43,10 @@ export const common = [
 			icon: embedYouTubeIcon,
 			keywords: [ __( 'music' ), __( 'video' ) ],
 			description: __( 'Embed a YouTube video.' ),
+			extra: {
+				InspectorControls: YouTubeInspectorControls,
+				previewTransform: YouTubePreviewTransform,
+			},
 		},
 		patterns: [ /^https?:\/\/((m|www)\.)?youtube\.com\/.+/i, /^https?:\/\/youtu\.be\/.+/i ],
 	},
