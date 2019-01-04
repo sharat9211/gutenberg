@@ -43,10 +43,8 @@ export const common = [
 			icon: embedYouTubeIcon,
 			keywords: [ __( 'music' ), __( 'video' ) ],
 			description: __( 'Embed a YouTube video.' ),
-			extra: {
-				InspectorControls: YouTubeInspectorControls,
-				previewTransform: YouTubePreviewTransform,
-			},
+			inspector: YouTubeInspectorControls,
+			previewTransform: YouTubePreviewTransform,
 		},
 		patterns: [ /^https?:\/\/((m|www)\.)?youtube\.com\/.+/i, /^https?:\/\/youtu\.be\/.+/i ],
 	},

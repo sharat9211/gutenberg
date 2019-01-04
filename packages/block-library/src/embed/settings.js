@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { getEmbedEditComponent } from './edit';
+import { getEmbedSaveComponent } from './save';
 
 /**
  * External dependencies
@@ -41,10 +42,20 @@ const embedAttributes = {
 	},
 };
 
-export function getEmbedBlockSettings( { title, description, icon, category = 'embed', transforms, keywords = [], supports = {}, responsive = true, extra = {} } ) {
+export function getEmbedBlockSettings( options ) {
+	const {
+		title,
+		description,
+		icon,
+		transforms,
+		category = 'embed',
+		keywords = [],
+		supports = {},
+	} = options;
 	// translators: %s: Name of service (e.g. VideoPress, YouTube)
 	const blockDescription = description || sprintf( __( 'Add a block that displays content pulled from other sites, like Twitter, Instagram or YouTube.' ), title );
-	const edit = getEmbedEditComponent( title, icon, responsive, extra );
+	const edit = getEmbedEditComponent( options );
+	const save = getEmbedSaveComponent( options );
 
 	return {
 		title,
@@ -97,27 +108,7 @@ export function getEmbedBlockSettings( { title, description, icon, category = 'e
 			} )
 		)( edit ),
 
-		save( { attributes } ) {
-			const { url, caption, type, providerNameSlug } = attributes;
-
-			if ( ! url ) {
-				return null;
-			}
-
-			const embedClassName = classnames( 'wp-block-embed', {
-				[ `is-type-${ type }` ]: type,
-				[ `is-provider-${ providerNameSlug }` ]: providerNameSlug,
-			} );
-
-			return (
-				<figure className={ embedClassName }>
-					<div className="wp-block-embed__wrapper">
-						{ `\n${ url }\n` /* URL needs to be on its own line. */ }
-					</div>
-					{ ! RichText.isEmpty( caption ) && <RichText.Content tagName="figcaption" value={ caption } /> }
-				</figure>
-			);
-		},
+		save,
 
 		deprecated: [
 			{
