@@ -19,7 +19,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import { Component, Fragment } from '@wordpress/element';
 
 export function getEmbedEditComponent( options ) {
-	const { title, icon, responsive = true, inspector: InspectorControls = {}, previewTransform = ( fetchedPreview ) => fetchedPreview } = options;
+	const { title, icon, responsive = true, inspector: InspectorControls, previewTransform = ( fetchedPreview ) => fetchedPreview } = options;
 	return class extends Component {
 		constructor() {
 			super( ...arguments );
