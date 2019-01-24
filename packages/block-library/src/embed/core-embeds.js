@@ -17,7 +17,7 @@ import {
 	embedRedditIcon,
 	embedTumbrIcon,
 } from './icons';
-import { YouTubeInspectorControls, YouTubePreviewTransform } from './youtube-controls';
+//import { YouTubeInspectorControls, YouTubePreviewTransform } from './youtube-controls';
 
 /**
  * WordPress dependencies
@@ -33,8 +33,8 @@ export const common = [
 			icon: embedTwitterIcon,
 			keywords: [ 'tweet' ],
 			description: __( 'Embed a tweet.' ),
-			preview: () => { return { provider: 'bums', html: '<p>previewing bums</p>' }; },
-			save: () => { return <p>bums</p>; },
+			// preview: () => { return { provider: 'bums', html: '<p>previewing bums</p>' }; },
+			// save: () => { return <p>bums</p>; },
 		},
 		patterns: [ /^https?:\/\/(www\.)?twitter\.com\/.+/i ],
 	},
@@ -45,8 +45,8 @@ export const common = [
 			icon: embedYouTubeIcon,
 			keywords: [ __( 'music' ), __( 'video' ) ],
 			description: __( 'Embed a YouTube video.' ),
-			inspector: YouTubeInspectorControls,
-			preview: YouTubePreviewTransform,
+			// inspector: YouTubeInspectorControls,
+			// preview: YouTubePreviewTransform,
 		},
 		patterns: [ /^https?:\/\/((m|www)\.)?youtube\.com\/.+/i, /^https?:\/\/youtu\.be\/.+/i ],
 	},

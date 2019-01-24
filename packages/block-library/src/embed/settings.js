@@ -6,16 +6,10 @@ import { getEmbedSaveComponent } from './save';
 import { getEmbedDeprecatedMigrations } from './deprecated';
 
 /**
- * External dependencies
- */
-import classnames from 'classnames/dedupe';
-
-/**
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import { RichText } from '@wordpress/editor';
 import { withSelect, withDispatch } from '@wordpress/data';
 
 const embedAttributes = {

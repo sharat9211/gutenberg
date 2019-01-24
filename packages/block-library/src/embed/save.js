@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { kebabCase, toLower } from 'lodash';
 import classnames from 'classnames/dedupe';
 
 /**
