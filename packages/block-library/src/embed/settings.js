@@ -3,6 +3,7 @@
  */
 import { getEmbedEditComponent } from './edit';
 import { getEmbedSaveComponent } from './save';
+import { getEmbedDeprecatedMigrations } from './deprecated';
 
 /**
  * External dependencies
@@ -56,6 +57,7 @@ export function getEmbedBlockSettings( options ) {
 	const blockDescription = description || sprintf( __( 'Add a block that displays content pulled from other sites, like Twitter, Instagram or YouTube.' ), title );
 	const edit = getEmbedEditComponent( options );
 	const save = getEmbedSaveComponent( options );
+	const deprecated = getEmbedDeprecatedMigrations( embedAttributes, options );
 
 	return {
 		title,
@@ -77,9 +79,29 @@ export function getEmbedBlockSettings( options ) {
 				const { url } = ownProps.attributes;
 				const core = select( 'core' );
 				const { getEmbedPreview, isPreviewEmbedFallback, isRequestingEmbedPreview, getThemeSupports } = core;
-				const preview = undefined !== url && getEmbedPreview( url );
+
+				let preview = false;
+				let fetching = false;
+
+				if ( undefined !== url ) {
+					if ( options.preview ) {
+						// We have a custom preview, so pass it the response from oembed and the attributes
+						// and use whatever it returns.
+						preview = options.preview( getEmbedPreview( url ), ownProps.attributes );
+					} else {
+						preview = getEmbedPreview( url );
+					}
+
+					if ( options.requesting ) {
+						// To support custom previews that use a rendering API endpoint, `options.requesting`
+						// should return if the API request is in progress.
+						fetching = options.requesting( url );
+					} else {
+						fetching = isRequestingEmbedPreview( url );
+					}
+				}
+
 				const previewIsFallback = undefined !== url && isPreviewEmbedFallback( url );
-				const fetching = undefined !== url && isRequestingEmbedPreview( url );
 				const themeSupports = getThemeSupports();
 				// The external oEmbed provider does not exist. We got no type info and no html.
 				const badEmbedProvider = !! preview && undefined === preview.type && false === preview.html;
@@ -110,29 +132,6 @@ export function getEmbedBlockSettings( options ) {
 
 		save,
 
-		deprecated: [
-			{
-				attributes: embedAttributes,
-				save( { attributes } ) {
-					const { url, caption, type, providerNameSlug } = attributes;
-
-					if ( ! url ) {
-						return null;
-					}
-
-					const embedClassName = classnames( 'wp-block-embed', {
-						[ `is-type-${ type }` ]: type,
-						[ `is-provider-${ providerNameSlug }` ]: providerNameSlug,
-					} );
-
-					return (
-						<figure className={ embedClassName }>
-							{ `\n${ url }\n` /* URL needs to be on its own line. */ }
-							{ ! RichText.isEmpty( caption ) && <RichText.Content tagName="figcaption" value={ caption } /> }
-						</figure>
-					);
-				},
-			},
-		],
+		deprecated,
 	};
 }
