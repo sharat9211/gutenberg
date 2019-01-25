@@ -1,3 +1,9 @@
+## 6.0.6 (Unreleased)
+
+### Bug Fixes
+
+- Block validation will now correctly validate character references, resolving some issues where a standalone ampersand `&` followed later in markup by a character reference (e.g. `&amp;`) could wrongly mark a block as being invalid.
+
 ## 6.0.5 (2019-01-03)
 
 ## 6.0.4 (2018-12-12)
