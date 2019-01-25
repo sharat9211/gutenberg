@@ -23,7 +23,6 @@ function init_extend_embeds() {
 		'gutenberg-test-extend-embeds',
 		plugins_url( 'extend-embeds/index.js', __FILE__ ),
 		array(
-			'wp-blocks',
 			'wp-element',
 			'wp-editor',
 			'wp-i18n',

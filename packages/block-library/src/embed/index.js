@@ -10,7 +10,7 @@ import { getEmbedBlockSettings } from './settings';
  */
 import { __, _x } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
-import { applyFilter } from '@wordpress/hooks';
+import { applyFilters } from '@wordpress/hooks';
 
 export const name = 'core/embed';
 
@@ -39,7 +39,7 @@ export const common = commonEmbeds.map(
 	( embedDefinition ) => {
 		return {
 			...embedDefinition,
-			settings: getEmbedBlockSettings( applyFilter( 'blocks.EmbedSettings', embedDefinition.settings ) ),
+			settings: getEmbedBlockSettings( applyFilters( 'blockLibrary.Embed.coreSettings', embedDefinition.settings ) ),
 		};
 	}
 );
@@ -48,7 +48,7 @@ export const others = otherEmbeds.map(
 	( embedDefinition ) => {
 		return {
 			...embedDefinition,
-			settings: getEmbedBlockSettings( applyFilter( 'blocks.EmbedSettings', embedDefinition.settings ) ),
+			settings: getEmbedBlockSettings( applyFilters( 'blockLibrary.Embed.coreSettings', embedDefinition.settings ) ),
 		};
 	}
 );
