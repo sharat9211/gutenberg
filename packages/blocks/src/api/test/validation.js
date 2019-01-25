@@ -62,7 +62,7 @@ describe( 'validation', () => {
 		} );
 
 		it( 'returns false for an invalid character reference', () => {
-			const result = isValidCharacterReference( ' Test &amp' );
+			const result = isValidCharacterReference( ' Test</h2><h2>Test &amp' );
 
 			expect( result ).toBe( false );
 		} );
@@ -431,8 +431,8 @@ describe( 'validation', () => {
 			//
 			// See: https://github.com/WordPress/gutenberg/issues/12448
 			const isEquivalent = isEquivalentHTML(
-				'<h2>Test &amp; Test &amp; Test</h2>',
-				'<h2>Test & Test &amp; Test</h2>'
+				'<h2>Test &amp; Test</h2><h2>Test &amp; Test</h2>',
+				'<h2>Test & Test</h2><h2>Test &amp; Test</h2>'
 			);
 
 			expect( isEquivalent ).toBe( true );
