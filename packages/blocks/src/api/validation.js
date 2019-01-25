@@ -204,9 +204,8 @@ const REGEXP_DECIMAL_CHARACTER_REFERENCE = /^#\d+$/;
 const REGEXP_HEXADECIMAL_CHARACTER_REFERENCE = /^#x[\da-f]+$/i;
 
 /**
- * Returns true if the given string `text` is a valid character reference
- * segment, or false otherwise. The text should not be stripped of its `&` and
- * `;` demarcations.
+ * Returns true if the given string is a valid character reference segment, or
+ * false otherwise. The text should be stripped of `&` and `;` demarcations.
  *
  * @param {string} text Text to test.
  *
