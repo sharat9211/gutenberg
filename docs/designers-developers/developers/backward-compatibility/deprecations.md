@@ -56,6 +56,9 @@ The Gutenberg project's deprecation policy is intended to support backward compa
 - The PHP function `gutenberg_meta_box_post_form_hidden_fields` has been removed. Use [`the_block_editor_meta_box_post_form_hidden_fields`](https://developer.wordpress.org/reference/functions/the_block_editor_meta_box_post_form_hidden_fields/) instead.
 - The PHP function `gutenberg_toggle_custom_fields` has been removed.
 - The PHP function `gutenberg_collect_meta_box_data` has been removed. Use [`register_and_do_post_meta_boxes`](https://developer.wordpress.org/reference/functions/register_and_do_post_meta_boxes/) instead.
+- The PHP function `gutenberg_redirect_to_classic_editor_when_saving_posts` has been removed.
+- The PHP function `gutenberg_revisions_link_to_editor` has been removed.
+- The PHP function `gutenberg_remember_classic_editor_when_saving_posts` has been removed.
 
 ## 4.5.0
 - `Dropdown.refresh()` has been deprecated as the contained `Popover` is now automatically refreshed.
